@@ -1,3 +1,4 @@
 flask-intro-demo.zip
 ref/
 venv/
+__pycache__/
