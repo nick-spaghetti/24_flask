@@ -66,3 +66,33 @@ def add_comment():
     <li>comment: {comment}</li>
     </ul>
     '''
+
+
+users = {
+    'whiskey': 'whiskey the dog',
+    'spike': 'spike the porcupine'
+}
+
+
+# < ------  # brackets turn that into a variable
+@app.route('/user/<username>')
+def show_user_profile(username):  # < ------  # passed as keyword argument
+    """show user profile for user"""
+    name = users[username]
+    return f'<h1>profile for {name}</h1>'
+
+
+posts = {
+    1: 'i like chicken tenders',
+    2: 'i hate mayo',
+    3: 'double rainbow all the way',
+    4: 'yolo omg kill me'
+}
+
+
+@app.route('/posts/<int:post_id>')
+def find_post(post_id):
+    print('post_id is a ', type(post_id))
+    # post_id = POSTS[id]
+    post_id = POSTS.get(id, 'post not found')
+    return f'<p>{post_id}</p>'
