@@ -1,6 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
+from flask_debugtoolbar import DebugToolbarExtension
+from random import randint, choice, sample
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'oh-so-secret'
+debug = DebugToolbarExtension(app)
 
 
 @app.route('/')
@@ -11,10 +15,22 @@ def home_page():
 
 
 @app.route('/hello')
-def say_hello():
-    '''return simple hello greeting'''
-    html = '<html><body><h1>hello</h1></body></html>'
-    return html
+def index():
+    'return to homepage'
+    return render_template('hello.html')
+
+
+# @app.route('/lucky')
+# def show_lucky_num():
+#     'example of simple dynamic template'
+#     num = randint(1, 100)
+#     return render_template('hello.html', lucky_num=num)
+
+
+@app.route('/lucky')
+def show_lucky_num():
+    num = randint(1, 10)
+    return render_template('lucky.html', lucky_num=num, msg='you are so lucky')
 
 
 @app.route('/goodbye')
@@ -101,3 +117,36 @@ def find_post(post_id):
 @app.route('/r/<subreddit>/comments/<int:post_id>')
 def show_comments(subreddit, post_id):
     return f'<h1>viewing comments for {post_id} from the {subreddit} subreddit</h1>'
+
+
+@app.route('/form')
+def show_form():
+    return render_template('form.html')
+
+
+compliments = ['cool', 'clever', 'tenacious', 'awesome', 'pythonic']
+
+
+@app.route('/greet')
+def get_greet():
+    username = request.args['username']
+    nice_thing = choice(compliments)
+    return render_template('greet.html', username=username, compliment=nice_thing)
+
+
+@app.route('/spell/<word>')
+def spell_word(word):
+    return render_template('spell_word.html', word=word)
+
+
+@app.route('/form-2')
+def show_form():
+    return render_template('form_2.html')
+
+
+@app.route('/greet-2')
+def get_greeting_2():
+    username = request.args['username']
+    wants = request.args['wants_compliments']
+    nice_things = sample(compliments, 3)
+    return render_template('greet_2.html', username=username, wants_compliments=wants, compliments=nice_things)

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} title from child goes here {% endblock %}</title>
+    <link rel="stylesheet" href="../static/app.css">
+    <script src="http://unpkg.com/jquery"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/">home</a>
+        <a href="/form">form</a>
+        <a href="/form-2">form-2</a>
+        <a href="/lucky">lucky</a>
+        <a href="/hello">hello</a>
+        <a href="/goodbye">goodbye</a>
+    </nav>
+    <main id="content">
+        {% block content %}
+        body content goes here from child template
+        {% endblock %}
+        <footer>copyright by whisky.</footer>
+    </main>
+    <script src="../static/app.js"></script>
+</body>
+
+</html>
