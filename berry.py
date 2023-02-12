@@ -1,5 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request, redirect
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'oh-so-secret'
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 
 @app.route('/')
@@ -33,3 +36,8 @@ def show_lucky_num():
 @app.route('/form')
 def show_form():
     return render_template('form.html')
+
+
+@app.route('/old-home-page')  # old route
+def redirect_to_home():
+    return redirect('/')  # redirect to new

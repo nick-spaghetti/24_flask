@@ -43,8 +43,8 @@ class Story:
 
 
 story1 = Story(
-    'history'
-    'a history tale'
+    "history"
+    '''a history tale'''
     ["place", "noun", "verb", "adjective", "plural_noun"],
     """Once upon a time in a long-ago {place}, there lived a
        large {adjective} {noun}. It loved to {verb} {plural_noun}."""
